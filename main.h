@@ -1,6 +1,5 @@
 #ifndef PRINTF_H_
 #define PRINTF_H_
-<<<<<<< HEAD
 
 #include <unistd.h>
 #include <stdio.h>
@@ -32,7 +31,7 @@ int print_x(va_list func);
 int print_p(va_list func);
 int print_r(va_list func);
 int putchr(char c);
-=======
+/*=======
 #include <stdio.h>
 #include <unistd.h>
 #include <stdarg.h>
@@ -50,9 +49,9 @@ int _printf(const char *format, ...);
 
 
 
-/****************** FUNCTIONS ******************/
+****************** FUNCTIONS ******************
 
-/* Funtions to print chars and strings */
+ Funtions to print chars and strings 
 int char_print(va_list types, char buffer[],
 	int flags, int width, int precision, int size);
 int str_print(va_list types, char buffer[],
@@ -60,7 +59,7 @@ int str_print(va_list types, char buffer[],
 int print_percent(va_list types, char buffer[],
 	int flags, int width, int precision, int size);
 
-/* Functions to print numbers */
+ Functions to print numbers 
 int print_int(va_list types, char buffer[],
 	int flags, int width, int precision, int size);
 int print_binary(va_list types, char buffer[],
@@ -73,7 +72,7 @@ int print_hex_dec(va_list types, char buffer[],
 	int flags, int width, int precision, int size);
 int print_hex_upper(va_list types, char buffer[],
 	int flags, int width, int precision, int size);
-
+*/
 
 
 
