@@ -1,9 +1,13 @@
 #include <stdarg.h>
 #include "printf.h"
-
+/**
+ * _printf - my printf function
+ * @format: a character string
+ * Return: word count
+ */
 int _printf(const char *format, ...)
 {
-	unsigned i, count, count2, count3;
+	unsigned int i, count, count2, count3;
 
 	va_list vars;
 
