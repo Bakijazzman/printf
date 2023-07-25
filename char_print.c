@@ -1,11 +1,11 @@
-#include "printf.h"
-#include <unistd.h>
-/**
- * char_print - my putchar
- * @c:  the character to be printed
- * Return: value 1 and value of c
- */
-int char_print(char c)
+#include "main.h"
+
+int char_print(va_list func)
 {
-	return (write(1, &c, 1));
+	int c = 0;
+	char word = va_arg(func, int);
+
+	c += putchr(word);
+	return (c);
+
 }
