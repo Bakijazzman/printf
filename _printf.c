@@ -8,7 +8,7 @@
  */
 int _printf(const char *format, ...)
 {
-	unsigned int i, count, count2, count3;
+	unsigned int i, count = 0, count2, count3;
 
 	va_list vars;
 
