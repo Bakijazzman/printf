@@ -1,4 +1,4 @@
-#include "printf.h"
+#include "main.h"
 /**
  * str_print - print as a string
  * @str: the string to be printed
@@ -15,7 +15,7 @@ int str_print(char *str)
 		{
 			char_print(str[i]);
 			count++;
-			j++;
+			i++;
 		}
 	}
 	return (count);

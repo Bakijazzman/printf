@@ -1,5 +1,5 @@
 #include <stdarg.h>
-#include "printf.h"
+#include "main.h"
 /**
  * _printf - my printf function
  * @format: a character string
@@ -11,7 +11,7 @@ int _printf(const char *format, ...)
 
 	va_list vars;
 
-	va_start(vars, format)
+	va_start(vars, format);
 		for (i = 0; format[i] != '\0'; i++)
 		{
 			if (format[i] != '%')
