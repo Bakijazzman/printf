@@ -3,7 +3,6 @@
 /**
  * get_specifier - finds the format function
  * @s: the format string
- * @func: argument pointer
  * Return: the number of bytes printed
  */
 
