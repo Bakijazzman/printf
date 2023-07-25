@@ -1,4 +1,9 @@
 #include "main.h"
+/**
+ * str_print - prints string
+ * @func: variadic function
+ * Return: word count
+ */
 
 int str_print(va_list func)
 {
@@ -9,7 +14,7 @@ int str_print(va_list func)
 	{
 		s = "(null)";
 	}
-	
+
 	for (; s[i] != '\0'; i++)
 	{
 		putchr(s[i]);

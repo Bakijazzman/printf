@@ -1,16 +1,17 @@
 #include "main.h"
 /**
  * for_spec - fumction that returns format
- * @spec: specified data type
+ * @format: struct for specified data type
  * @func: variiable arguement list
+ * Return: word count
  */
 int for_spec(char format, va_list func)
 {
 	const formats con[] = {
-	 	{'%', print_per},
+		{'%', print_per},
 		{'s', str_print},
-		{'c', char_print}
-	/*	{'b', print_b},
+		{'c', char_print},
+		{'b', print_b},
 		{'d', print_d},
 		{'i', print_i},
 		{'u', print_u},
@@ -18,22 +19,22 @@ int for_spec(char format, va_list func)
 		{'X', print_X},
 		{'x', print_x},
 		{'p', print_p},
-		{'r', print_r}*/
+		{'r', print_r}
 	};
 	unsigned int i = 0, c = 0;
 
 	if ('%' == format)
 	{
 		putchr('%');
-		return(c);
+		return (c);
 	}
 
-	for (; i < (sizeof(con)/sizeof(formats)); i++)
+	for (; i < (sizeof(con) / sizeof(formats)); i++)
 	{
 		if (con[i].format == format)
 		{
 			return (con[i].run(func));
-		}	
+		}
 	}
 	putchr('%');
 	putchr(format);
