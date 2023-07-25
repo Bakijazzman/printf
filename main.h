@@ -31,6 +31,8 @@ int print_x(va_list func);
 int print_p(va_list func);
 int print_r(va_list func);
 int putchr(char c);
+extern formats con;
+extern int c;
 /*=======
 #include <stdio.h>
 #include <unistd.h>
