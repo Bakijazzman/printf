@@ -10,7 +10,7 @@ int _printf(const char *format, ...)
 	long int c = 0, i = 0;
 
 	va_list func;
-
+/*
 	if ((format[i] == '%' && format[i + 1] == '\0') || format == NULL)
 	{
 		return (-1);
@@ -19,6 +19,7 @@ int _printf(const char *format, ...)
 	{
 		return (0);
 	}
+*/
 	va_start(func, format);
 	while (format[i] != '\0')
 	{

@@ -5,7 +5,7 @@
  * @func: variadic function
  * Return: word_count
  */
-int print_o(va_list func)
+int print_u(va_list func)
 {
 	int num[10];
 
@@ -40,4 +40,3 @@ int print_o(va_list func)
 
 	return (count);
 }
-p

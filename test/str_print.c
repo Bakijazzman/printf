@@ -1,22 +1,24 @@
 #include "main.h"
 /**
- * str_print - print as a string
- * @str: the string to be printed
- * Return: word countt
+ * str_print - prints string
+ * @func: variadic function
+ * Return: word count
  */
 
-int str_print(char *str)
+int str_print(va_list func)
 {
-	unsigned int i = 0, count = 0;
+	int i = 0, c = 0;
+	char *s = va_arg(func, char *);
 
-	if (str)
+	if (s == NULL)
 	{
-		while (str[i] != '\0')
-		{
-			char_print(str[i]);
-			count++;
-			i++;
-		}
+		s = "(null)";
 	}
-	return (count);
+
+	for (; s[i] != '\0'; i++)
+	{
+		putchr(s[i]);
+		c++;
+	}
+	return (c);
 }

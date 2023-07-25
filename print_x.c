@@ -1,31 +1,107 @@
 #include "main.h"
 
 /**
- * print_x - function that prints the hex format.
- * @func: variadic func
- *  Return: count
+ * print_hex - prints unsigned hex numbers in lowercase
+ * @func: the argument pointer
+ * @params: the parameters struct
+ *
+ * Return: bytes printed
  */
-int print_x(va_list func)
+
+int print_hex(va_list func, params_t *params)
 {
-	static const char hex[] = "0123456789abcdef";
-	static char buffer[1024];
+	unsigned long l;
+	int c = 0;
+	char *str;
 
-	int count = 0;
-	char *ptr = &buffer[1023];
-	unsigned int a = va_arg(func, unsigned int);
+	if (params->l_modifier)
+		l = (unsigned long)va_arg(func, unsigned long);
+	else if (params->h_modifier)
+		l = (unsigned short int)va_arg(func, unsigned int);
+	else
+		l = (unsigned int)va_arg(func, unsigned int);
 
-	*ptr = '\0';
-
-	do {
-		*--ptr = hex[a % 16];
-		a = a / 16;
-	} while (a != 0);
-
-	while (*ptr != '\0')
+	str = convert(l, 16, CONVERT_UNSIGNED | CONVERT_LOWERCASE, params);
+	if (params->hashtag_flag && l)
 	{
-		count = count + write(1, ptr, 1);
-		ptr++;
+		*--str = 'x';
+		*--str = '0';
 	}
+	params->unsign = 1;
+	return (c += print_number(str, params));
+}
 
-	return (count);
+/**
+ * print_HEX - prints unsigned hex numbers in uppercase
+ * @func: the argument pointer
+ * @params: the parameters struct
+ *
+ * Return: bytes printed
+ */
+int print_HEX(va_list func, params_t *params)
+{
+	unsigned long l;
+	int c = 0;
+	char *str;
+
+	if (params->l_modifier)
+		l = (unsigned long)va_arg(func, unsigned long);
+	else if (params->h_modifier)
+		l = (unsigned short int)va_arg(func, unsigned int);
+	else
+		l = (unsigned int)va_arg(func, unsigned int);
+
+	str = convert(l, 16, CONVERT_UNSIGNED, params);
+	if (params->hashtag_flag && l)
+	{
+		*--str = 'X';
+		*--str = '0';
+	}
+	params->unsign = 1;
+	return (c += print_number(str, params));
+}
+/**
+ * print_binary - prints unsigned binary number
+ * @func: the argument pointer
+ * @params: the parameters struct
+ *
+ * Return: bytes printed
+ */
+int print_binary(va_list func, params_t *params)
+{
+	unsigned int n = va_arg(func, unsigned int);
+	char *str = convert(n, 2, CONVERT_UNSIGNED, params);
+	int c = 0;
+
+	if (params->hashtag_flag && n)
+		*--str = '0';
+	params->unsign = 1;
+	return (c += print_number(str, params));
+}
+
+/**
+ * print_octal - prints unsigned octal numbers
+ * @func: the argument pointer
+ * @params: the parameters struct
+ *
+ * Return: bytes printed
+ */
+int print_octal(va_list func, params_t *params)
+{
+	unsigned long l;
+	char *str;
+	int c = 0;
+
+	if (params->l_modifier)
+		l = (unsigned long)va_arg(func, unsigned long);
+	else if (params->h_modifier)
+		l = (unsigned short int)va_arg(func, unsigned int);
+	else
+		l = (unsigned int)va_arg(func, unsigned int);
+	str = convert(l, 8, CONVERT_UNSIGNED, params);
+
+	if (params->hashtag_flag && l)
+		*--str = '0';
+	params->unsign = 1;
+	return (c += print_number(str, params));
 }

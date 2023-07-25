@@ -29,7 +29,8 @@ int print_d(va_list func)
 	while (i >= 1)
 	{
 		char c = ((x / i) % 10 + '0');
-			i /= 10;
+		count += write(1, &c, 1);
+		i /= 10;
 	}
 	return (count);
 }

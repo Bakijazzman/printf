@@ -1,43 +1,139 @@
 #include "main.h"
+
 /**
- * for_spec - fumction that returns format
- * @format: struct for specified data type
- * @func: variiable arguement list
- * Return: word count
+ * get_specifier - finds the format function
+ * @s: the format string
+ * @func: argument pointer
+ * Return: the number of bytes printed
  */
-int for_spec(char format, va_list func)
+
+int (*get_specifier(char *s))(va_list func, params_t *params)
 {
-	const formats con[] = {
-		{'%', print_per},
-		{'s', str_print},
-		{'c', char_print},
-		{'b', print_b},
-		{'d', print_d},
-		{'i', print_i},
-		{'u', print_u},
-		{'o', print_o},
-		{'X', print_X},
-		{'x', print_x},
-		{'p', print_p},
-		{'r', print_r}
+	specifier_t specifiers[] = {
+		{"c", print_char},
+		{"d", print_int},
+		{"i", print_int},
+		{"s", print_string},
+		{"%", print_percent},
+		{"b", print_binary},
+		{"o", print_octal},
+		{"u", print_unsigned},
+		{"x", print_hex},
+		{"X", print_HEX},
+		{"p", print_address},
+		{"S", print_S},
+		{"r", print_rev},
+		{"R", print_rot13},
+		{NULL, NULL}
 	};
-	unsigned int i = 0, c = 0;
+	int i = 0;
 
-	if ('%' == format)
+	while (specifiers[i].specifier)
 	{
-		putchr('%');
-		return (c);
-	}
-
-	for (; i < (sizeof(con) / sizeof(formats)); i++)
-	{
-		if (con[i].format == format)
+		if (*s == specifiers[i].specifier[0])
 		{
-			return (con[i].run(func));
+			return (specifiers[i].f);
 		}
+		i++;
 	}
-	putchr('%');
-	putchr(format);
-	c += 2;
-	return (c);
+	return (NULL);
+}
+
+/**
+ * get_print_func - finds the format func
+ * @s: the format string
+ * @func: argument pointer
+ * @params: the parameters struct
+ *
+ * Return: the number of bytes printed
+ */
+int get_print_func(char *s, va_list func, params_t *params)
+{
+	int (*f)(va_list, params_t *) = get_specifier(s);
+
+	if (f)
+		return (f(func, params));
+	return (0);
+}
+
+/**
+ * get_flag - finds the flag func
+ * @s: the format string
+ * @params: the parameters struct
+ *
+ * Return: if flag was valid
+ */
+int get_flag(char *s, params_t *params)
+{
+	int i = 0;
+
+	switch (*s)
+	{
+		case '+':
+			i = params->plus_flag = 1;
+			break;
+		case ' ':
+			i = params->space_flag = 1;
+			break;
+		case '#':
+			i = params->hashtag_flag = 1;
+			break;
+		case '-':
+			i = params->minus_flag = 1;
+			break;
+		case '0':
+			i = params->zero_flag = 1;
+			break;
+	}
+	return (i);
+}
+
+/**
+ * get_modifier - finds the modifier func
+ * @s: the format string
+ * @params: the parameters struct
+ *
+ * Return: if modifier was valid
+ */
+int get_modifier(char *s, params_t *params)
+{
+	int i = 0;
+
+	switch (*s)
+	{
+	case 'h':
+		i = params->h_modifier = 1;
+		break;
+	case 'l':
+		i = params->l_modifier = 1;
+		break;
+	}
+	return (i);
+}
+
+/**
+ * get_width - gets the width from the format string
+ * @s: the format string
+ * @params: the parameters struct
+ * @ap: the argument pointer
+ *
+ * Return: new pointer
+ */
+char *get_width(char *s, params_t *params, va_list ap)
+/* should this function use char **s and modify the pointer? */
+{
+	int d = 0;
+
+	if (*s == '*')
+	{
+		d = va_arg(ap, int);
+		s++;
+	}
+	else
+	{
+		while (_isdigit(*s))
+			d = d * 10 + (*s++ - '0');
+	}
+	params->width = d;
+	return (s);
 }
