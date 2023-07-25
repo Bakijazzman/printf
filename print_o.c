@@ -20,7 +20,7 @@ int print_o(va_list func)
 
 	while (*p != '\0')
 	{
-		c += putchr(p);
+		c += write(1, p, 1);
 		p++;
 	}
 	return (c);

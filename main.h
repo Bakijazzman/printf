@@ -6,6 +6,11 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
+#define F_MINUS1
+#define F_PLUS2
+#define F_ZERO4
+#define F_HASH8
+#define F_SPACE16
 /**
  * formats - structs for specifiers
  * @format: specifiers

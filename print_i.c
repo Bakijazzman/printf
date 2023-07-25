@@ -10,7 +10,7 @@ int print_i(va_list func)
 	unsigned int x, y, i;
 	int c = 0, d;
 
-	d = va_arg(func, int)
+	d = va_arg(func, int);
 	if (d < 0)
 	{
 		 x = (d * -1);
